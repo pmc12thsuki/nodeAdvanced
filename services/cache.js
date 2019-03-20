@@ -5,12 +5,12 @@ const util = require('util');
 
 const redisURI = 'redis://127.0.0.1:6379';
 const client = redis.createClient(redisURI);
-client.hget = util.promisify(client.hget); // 把使用 callback 的 get function 變成 promise
+client.hget = util.promisify(client.hget); // 把使用 callback 的 function 變成 promise
 
 const { exec } = mongoose.Query.prototype;
 // exec is a reference to the original exec function
 // 原本的 mongoose.Query.prototype.exec 是一個地址，指向原始的 exec function 的位置
-// 現在將變數 exec 也指向這個原始 exec functioni 的位置
+// 現在將變數 exec 也指向這個原始 exec function 的位置
 // 所以現在有兩個 pointer 指向同一個 function
 
 mongoose.Query.prototype.cache = function (options = {}) {
